@@ -4,7 +4,7 @@ const userLocal = JSON.parse(localStorage.getItem('user'))
 
 const api = axios.create({
   baseURL: 'http://localhost:5050/api',
-  headers: { token: `Bearer ${userLocal.token}` || null }
+  headers: { token: `Bearer ${userLocal?.token}` || null }
 })
 
 export const signIn = async (url, params) => {

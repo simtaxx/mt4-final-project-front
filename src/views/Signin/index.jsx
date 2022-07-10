@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../api';
 import UserContext from '../../contexts/user-context';
@@ -7,6 +7,13 @@ const Signin = () => {
   const userContext = useContext(UserContext)
   const [formEmail, setEmail] = useState('')
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const userLocal = JSON.parse(localStorage.getItem('user'))
+    if (userLocal?.emailChecked) {
+      navigate('/challenges')
+    }
+  }, [])
 
   const handleClick = async () => {
     const params = { email: formEmail }
