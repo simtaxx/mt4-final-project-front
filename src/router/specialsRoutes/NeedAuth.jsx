@@ -1,11 +1,24 @@
-import React from "react"
-import { Navigate } from "react-router-dom"
+import React from 'react'
+import { Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const NeedAuth = ({ children }) => {
-  const isAuth = true
+  const checkAuth = () => {
+    if (!localStorage.getItem('user')) return { isAuth: false, route: '/signin' }
+    const { email, emailChecked } = JSON.parse(localStorage.getItem('user'))
+    if (!email) {
+      return { isAuth: false, route: '/signin' }
+    } else if (!emailChecked) {
+      return { isAuth: false, route: '/email-check' }
+    } else {
+      return { isAuth: true, route: '/challenges' }
+    }
+  }
+
+  const { isAuth, route } = checkAuth()
+
   if (!isAuth) {
-    return <Navigate to="/" />
+    return <Navigate to={route} />
   }
   return children
 }

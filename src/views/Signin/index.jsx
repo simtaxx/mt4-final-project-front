@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signIn } from '../../api';
+import UserContext from '../../contexts/user-context';
 
 const Signin = () => {
+  const userContext = useContext(UserContext)
+  const [formEmail, setEmail] = useState('')
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const userLocal = JSON.parse(localStorage.getItem('user'))
+    if (userLocal?.emailChecked) {
+      navigate('/challenges')
+    }
+  }, [])
+
+  const handleClick = async () => {
+    const params = { email: formEmail }
+    const signUser = await signIn('/auth/user', params)
+    const { email, emailChecked, token } = signUser.data
+    userContext.setUser({ email, token: token || null, emailChecked })
+    return !emailChecked ? navigate('/email-check') : navigate('/challenges')
+  }
+
   return (
-    
     <div className="flex flex-col mt-12">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
         <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full">
@@ -12,18 +33,14 @@ const Signin = () => {
             className="block border border-grey-light w-full p-3 rounded mb-4 text-black"
             name="email"
             placeholder="Email"
-          />
-          <input 
-            type="password"
-            className="block border border-grey-light w-full p-3 rounded mb-4 text-black"
-            name="password"
-            placeholder="Mot de passe"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <button
-              type="submit"
-              className="w-full text-center py-3 rounded bg-white text-black hover:bg-green-dark focus:outline-none my-1"
+            onClick={handleClick}
+            type="submit"
+            className="w-full text-center py-3 rounded bg-white text-black hover:bg-green-dark focus:outline-none my-1"
           >
-            Créer ton compte
+            Connecte toi
           </button>
         </div>
       </div>
