@@ -8,8 +8,11 @@ const App = () => {
   const [user, setUser] = useState({})
 
   useEffect(() => {
-    if (user.token) {
+    if (user.email) {
       localStorage.setItem('user', JSON.stringify(user))
+    } else {
+      const userLocal = JSON.parse(localStorage.getItem('user'))
+      if (userLocal) setUser({ ...userLocal })
     }
   }, [user])
 

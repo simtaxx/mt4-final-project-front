@@ -9,12 +9,10 @@ const Signin = () => {
   const navigate = useNavigate()
 
   const handleClick = async () => {
-    const userToken = JSON.parse(localStorage.getItem('user'))?.token || null
     const params = { email: formEmail }
-    const options = { headers: { token: userToken ? `Bearer ${userToken}` : '' } }
-    const signUser = await signIn('http://localhost:5050/api/auth/user', params, options)
-    const { email, userId, emailChecked, token } = signUser.data
-    userContext.setUser({ email, userId, token, emailChecked })
+    const signUser = await signIn('/auth/user', params)
+    const { email, emailChecked, token } = signUser.data
+    userContext.setUser({ email, token: token || null, emailChecked })
     return !emailChecked ? navigate('/email-check') : navigate('/challenges')
   }
 
