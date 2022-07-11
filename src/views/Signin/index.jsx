@@ -20,7 +20,7 @@ const Signin = () => {
     const signUser = await signIn('/auth/user', params)
     const { email, emailChecked, token } = signUser.data
     userContext.setUser({ email, token: token || null, emailChecked })
-    return !emailChecked ? navigate('/email-check') : navigate('/challenges')
+    return !emailChecked || !token ? navigate('/email-check') : navigate('/challenges')
   }
 
   return (

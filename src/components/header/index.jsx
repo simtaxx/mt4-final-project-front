@@ -9,7 +9,7 @@ const Header = () => {
   const userContext = useContext(UserContext)
   const { user } = userContext
 
-  const userProfile = user.email ? <Link to="/profile">{user.email}</Link> : <Link to="/signin">Connexion</Link>
+  const userProfile = user.email && user.email !== ' ' ? <Link to="/profile">{user.email}</Link> : <Link to="/signin">Connexion</Link>
 
   return (
     <header className='header'>

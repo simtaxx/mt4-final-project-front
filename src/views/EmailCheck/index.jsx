@@ -12,16 +12,27 @@ const EmailCheck = () => {
 
   useEffect(() => {
     const checkEmail = async () => {
-      const response = await validateEmail('/auth/email-check', { token })
-      const { emailChecked } = response.data
-      userContext.setUser(prev => ({ ...prev, token, emailChecked }))
-      const userLocal = JSON.parse(localStorage.getItem('user'))
-      if (userLocal.emailChecked) {
-        navigate('/challenges')
+      try {
+        const { response } = await validateEmail('/auth/email-check', { token })
+        const { emailChecked, askForJwt } = response.data
+        if (!askForJwt) {
+          userContext.setUser(prev => ({ ...prev, token, emailChecked }))
+          const userLocal = JSON.parse(localStorage.getItem('user'))
+          if (userLocal.emailChecked) {
+            navigate('/challenges')
+          }
+        } else {
+          userContext.setUser({email: ' ', token: ' '})
+          navigate('/signin')
+        }
+      } catch (error) {
+        return false
       }
     }
     if (token) {
       checkEmail()
+    } else {
+      navigate('/')
     }
   }, [])
 

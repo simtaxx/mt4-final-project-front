@@ -5,10 +5,10 @@ import PropTypes from 'prop-types'
 const NeedAuth = ({ children }) => {
   const checkAuth = () => {
     if (!localStorage.getItem('user')) return { isAuth: false, route: '/signin' }
-    const { email, emailChecked } = JSON.parse(localStorage.getItem('user'))
+    const { email, emailChecked, token } = JSON.parse(localStorage.getItem('user'))
     if (!email) {
       return { isAuth: false, route: '/signin' }
-    } else if (!emailChecked) {
+    } else if (!emailChecked || !token) {
       return { isAuth: false, route: '/email-check' }
     } else {
       return { isAuth: true, route: '/challenges' }
