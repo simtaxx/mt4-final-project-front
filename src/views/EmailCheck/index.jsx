@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { validateEmail } from '../../api';
 import UserContext from '../../contexts/user-context';
 
 const EmailCheck = () => {
   const userContext = useContext(UserContext)
+  const location = useLocation()
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')
   const navigate = useNavigate()
@@ -13,16 +14,15 @@ const EmailCheck = () => {
   useEffect(() => {
     const checkEmail = async () => {
       try {
-        const { response } = await validateEmail('/auth/email-check', { token })
-        const { emailChecked, askForJwt } = response.data
-        if (!askForJwt) {
+        const response = await validateEmail('/auth/email-check', { token })
+        if (!response?.response?.data?.askForJwt) {
+          const { emailChecked } = response.data
           userContext.setUser(prev => ({ ...prev, token, emailChecked }))
-          const userLocal = JSON.parse(localStorage.getItem('user'))
-          if (userLocal.emailChecked) {
-            navigate('/challenges')
+          if (emailChecked === 1) {
+            navigate('/')
           }
         } else {
-          userContext.setUser({email: ' ', token: ' '})
+          userContext.setUser({ email: ' ' })
           navigate('/signin')
         }
       } catch (error) {
@@ -31,7 +31,7 @@ const EmailCheck = () => {
     }
     if (token) {
       checkEmail()
-    } else {
+    } else if (!token && location.pathname === 'email-check') {
       navigate('/')
     }
   }, [])

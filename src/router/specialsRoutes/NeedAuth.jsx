@@ -6,7 +6,7 @@ const NeedAuth = ({ children }) => {
   const checkAuth = () => {
     if (!localStorage.getItem('user')) return { isAuth: false, route: '/signin' }
     const { email, emailChecked, token } = JSON.parse(localStorage.getItem('user'))
-    if (!email) {
+    if (!email || email === ' ') {
       return { isAuth: false, route: '/signin' }
     } else if (!emailChecked || !token) {
       return { isAuth: false, route: '/email-check' }

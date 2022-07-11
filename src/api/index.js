@@ -1,10 +1,7 @@
 import axios from 'axios'
 
-const userLocal = JSON.parse(localStorage.getItem('user'))
-
 const api = axios.create({
-  baseURL: 'http://localhost:5050/api',
-  headers: { token: `Bearer ${userLocal?.token}` || null }
+  baseURL: 'http://localhost:5050/api'
 })
 
 export const signIn = async (url, params) => {
@@ -20,6 +17,15 @@ export const validateEmail = async (url, params) => {
   try {
     const validateEmail = await api.post(url, params)
     return validateEmail
+  } catch (error) {
+    return error
+  }
+}
+
+export const fetchChallenges = async (url, options) => {
+  try {
+    const challenges = await api.get(url, options)
+    return challenges
   } catch (error) {
     return error
   }
