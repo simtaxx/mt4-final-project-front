@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { fetchChallenges } from '../../api'
 import UserContext from '../../contexts/user-context'
 import LoadingContext from '../../contexts/loading-context'
