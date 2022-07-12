@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../api';
 import UserContext from '../../contexts/user-context';
+import LoadingContext from '../../contexts/loading-context'
 
 const Signin = () => {
   const userContext = useContext(UserContext)
+  const loadingContext = useContext(LoadingContext)
   const [formEmail, setEmail] = useState('')
   const navigate = useNavigate()
 
@@ -16,10 +18,12 @@ const Signin = () => {
   }, [])
 
   const handleClick = async () => {
+    loadingContext.setIsLoading(true)
     const params = { email: formEmail }
     const signUser = await signIn('/auth/user', params)
     const { email, emailChecked, token } = signUser.data
     userContext.setUser({ email, token: token || null, emailChecked })
+    loadingContext.setIsLoading(false)
     return !emailChecked || !token ? navigate('/email-check') : navigate('/challenges')
   }
 

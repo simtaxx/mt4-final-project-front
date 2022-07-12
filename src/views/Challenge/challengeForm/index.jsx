@@ -68,7 +68,7 @@ const ChallengeForm = ({ challengeName }) => {
 
   return (
     <div className="challenge-form flex flex-col mt-12">
-      <div className="container mx-auto px-2 w-3/5 h-3/4 relative">
+      <div className="container mx-auto px-2 w-3/5 relative">
         <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full h-full">
           <h1 className="mb-8 text-3xl text-center">{challengeName}</h1>
           {displayedForm}
