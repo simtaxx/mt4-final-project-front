@@ -10,6 +10,7 @@ import Profile from '../views/Profile'
 import Stats from '../views/Stats'
 import Error from '../views/Error'
 import EmailCheck from '../views/EmailCheck'
+import Challenge from '../views/Challenge'
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
       <Route path="/" element={<Home />} />
       <Route path="/signin" element={<Signin />} />
       <Route path="/challenges" element={<NeedAuth><Challenges /></NeedAuth>} />
+      <Route path="/challenges/:id" element={<NeedAuth><Challenge /></NeedAuth>} />
       <Route path="/profile" element={<NeedAuth><Profile /></NeedAuth>} />
       <Route path="/stats" element={<NeedAuth><Stats /></NeedAuth>} />
       <Route path="/error" element={<Error />} />

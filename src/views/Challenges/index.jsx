@@ -1,7 +1,9 @@
-import React, { useContext,useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { fetchChallenges } from '../../api';
-import UserContext from '../../contexts/user-context';
+import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { fetchChallenges } from '../../api'
+import UserContext from '../../contexts/user-context'
+import ChallengeCard from './challengeCard'
+import './styles.scss'
 
 const Challenges = () => {
   const userContext = useContext(UserContext)
@@ -11,7 +13,7 @@ const Challenges = () => {
 
   useEffect(() => {
     getChallenges()
-  }, [])
+  }, [setChallenges])
 
   const getChallenges = async () => {
     try {
@@ -29,11 +31,20 @@ const Challenges = () => {
     }
   }
 
+  const challengesList = challenges.map((challenge) => {
+    return (
+      <ChallengeCard key={challenge.challengeId} challenge={challenge} />
+    )
+  })
+
   return (
-    <div>
+    <div className='challenges'>
       <h1 className='text-3xl font-bold'>Challenges</h1>
+      <div className='challenges__list'>
+        {challengesList}
+      </div>
     </div>
-  );
+  )
 }
 
 export default Challenges
