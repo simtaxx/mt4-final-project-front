@@ -78,11 +78,10 @@ const ChallengeForm = ({ challengeName, challengeId, questions }) => {
       setCurrentQuestion(question)
     } else {
       setIsChallengeFinished(true)
-      console.log(isChallengeFinished)
     }
     data.forEach((question) => {
       if (question.isReponseOk) {
-        setScore(score + question.questionsScore)
+        setScore(score + question.questionScore)
       }
     })
     loadingContext.setIsLoading(false)
