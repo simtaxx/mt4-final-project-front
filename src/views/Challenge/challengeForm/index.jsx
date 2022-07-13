@@ -2,11 +2,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { checkUserConnections, sendUserChallengeInformations, checkQuestions } from '../../../api'
 import UserContext from '../../../contexts/user-context'
+import LoadingContext from '../../contexts/loading-context'
 import { forms } from './forms'
 import './styles.scss'
 
 const ChallengeForm = ({ challengeName, challengeId, questions }) => {
   const userContext = useContext(UserContext)
+  const loadingContext = useContext(LoadingContext)
   const [formsList, setFormsList] = useState([])
   const [currentFormId, setCurrentFormId] = useState(0)
   const [showChallenge, setShowChallenge] = useState(false)
@@ -27,6 +29,7 @@ const ChallengeForm = ({ challengeName, challengeId, questions }) => {
   }
 
   const connection = async () => {
+    loadingContext.setIsLoading(true)
     const newUserData = {}
     formsList.forEach((form) => {
       form.inputs.forEach(({ name, value }) => {
@@ -46,6 +49,7 @@ const ChallengeForm = ({ challengeName, challengeId, questions }) => {
         userContext.setUser(prevState => ({ ...prevState, ...newUserData }))
       }
     }
+    loadingContext.setIsLoading(false)
   }
 
   const updateFormList = (e, prop) => {
@@ -62,6 +66,7 @@ const ChallengeForm = ({ challengeName, challengeId, questions }) => {
   }
 
   const handleCheckQuestions = async () => {
+    loadingContext.setIsLoading(true)
     setScore(0)
     const { token } = JSON.parse(localStorage.getItem('user'))
     const options = { headers: { token: `Bearer ${token}` } }
@@ -79,6 +84,7 @@ const ChallengeForm = ({ challengeName, challengeId, questions }) => {
         setScore(score + question.questionsScore)
       }
     })
+    loadingContext.setIsLoading(false)
   } 
 
   const displayedForm = formsList.find(form => form.id === currentFormId)?.inputs.map((input) => {
