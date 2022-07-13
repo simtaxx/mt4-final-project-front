@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UserContext from '../../contexts/user-context';
+import React from 'react';
 import Lottie from 'react-lottie';
 import animationData from '../../assets/lotties/wumpus';
 import './styles.scss'
@@ -7,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate()
-  const userContext = useContext(UserContext)
 
   const defaultOptions = {
     loop: true,
