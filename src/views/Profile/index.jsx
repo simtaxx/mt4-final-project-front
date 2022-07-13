@@ -21,14 +21,14 @@ const Profile = () => {
     <main className="flex flex-col mt-20">
       <div className="min-w-20 container max-w-max mx-auto flex-1 flex flex-col items-center px-2">
         <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full h-full">
-          <h1 className="mb-8 text-3xl text-center">Welcome to Your Profile</h1>
+          <h1 className="mb-8 text-3xl text-center">Bienvenue sur ton profile !</h1>
           <p className='mb-8 text-2xl text-center'>{userProfile}</p>
           <button
             onClick={handleClick}
             type="submit"
             className="w-full text-center py-3 rounded bg-red-600 text-white hover:bg-red-500 focus:outline-none my-1"
           >
-            Sign off
+            Me déconnecter
           </button>
         </div>
       </div>
