@@ -23,7 +23,7 @@ const EmailCheck = () => {
           userContext.setUser(prev => ({ ...prev, token, emailChecked }))
           if (emailChecked === 1) {
             loadingContext.setIsLoading(false)
-            navigate('/challenges')
+            navigate('/')
           }
           loadingContext.setIsLoading(false)
         } else {
