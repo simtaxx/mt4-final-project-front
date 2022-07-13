@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react'
+import { checkUserConnections, sendUserChallengeInformations } from '../../../api'
 import { forms } from './forms'
 import './styles.scss'
 
-const ChallengeForm = ({ challengeName }) => {
+const ChallengeForm = ({ challengeName, challengeId, questions }) => {
   const [formsList, setFormsList] = useState([])
   const [currentFormId, setCurrentFormId] = useState(0)
+  const [showChallenge, setShowChallenge] = useState(false)
+  const [currentQuestion, setCurrentQuestion] = useState({})
 
   useEffect(() => {
     setFormsList(forms(next, previous, connection))
@@ -19,17 +22,26 @@ const ChallengeForm = ({ challengeName }) => {
     setCurrentFormId(currentId - 1)
   }
 
-  const connection = () => {
+  const connection = async () => {
     const newUserData = {}
     formsList.forEach((form) => {
-      console.log(form)
       form.inputs.forEach(({ name, value }) => {
         if (!['next', 'connection', 'previous'].includes(name)) {
           newUserData[name] = value
         }
       })
     })
-    console.log(newUserData)
+    const { token } = JSON.parse(localStorage.getItem('user'))
+    const options = { headers: { token: `Bearer ${token}` } }
+    const { data } = await sendUserChallengeInformations(`/challenges/${challengeId}/user`, newUserData, options)
+    if (data.message === 'Credentials added') {
+      const { data } = await checkUserConnections(`/challenges/${challengeId}/check`, options)
+      if (data.statusConnection) {
+        console.log(questions)
+        setCurrentQuestion(questions[0])
+        setShowChallenge(true)
+      }
+    }
   }
 
   const updateFormList = (e, prop) => {
@@ -44,6 +56,10 @@ const ChallengeForm = ({ challengeName }) => {
     newForms[currentFormId].inputs = newInputs
     setFormsList(newForms)
   }
+
+  const checkQuestions = () => {
+    console.log('ça check')
+  } 
 
   const displayedForm = formsList.find(form => form.id === currentFormId)?.inputs.map((input) => {
     return input.type === 'text'
@@ -71,7 +87,17 @@ const ChallengeForm = ({ challengeName }) => {
       <div className="container mx-auto px-2 w-3/5 relative">
         <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full h-full">
           <h1 className="mb-8 text-3xl text-center">{challengeName}</h1>
-          {displayedForm}
+          {
+            showChallenge
+              ? (
+                <div>
+                  <h2>{currentQuestion.questionTitle}</h2>
+                  <p>Question amount: {currentQuestion.questionPoints}</p>
+                  <button onClick={checkQuestions}>Start</button>
+                </div>
+              )
+              : displayedForm
+          }
         </div>
       </div>
     </div>

@@ -5,16 +5,23 @@ export const forms = (next, previous, connection) => [
       {
         styles: 'block border border-grey-light w-full p-3 rounded mb-4 text-black',
         type: 'text',
-        name: 'firstname',
+        name: 'username',
         value: '',
-        placeholder: 'Firstname'
+        placeholder: 'Instance username'
       },
       {
         styles: 'block border border-grey-light w-full p-3 rounded mb-4 text-black',
         type: 'text',
-        name: 'lastname',
+        name: 'host',
         value: '',
-        placeholder: 'Lastname'
+        placeholder: 'Host'
+      },
+      {
+        styles: 'block border border-grey-light w-full p-3 rounded mb-4 text-black',
+        type: 'text',
+        name: 'port',
+        value: '',
+        placeholder: 'Port'
       },
       {
         styles: 'w-full py-3 rounded bg-white text-black hover:bg-green-dark focus:outline-none my-1',
@@ -31,16 +38,30 @@ export const forms = (next, previous, connection) => [
       {
         styles: 'block border border-grey-light w-full p-3 rounded mb-4 text-black',
         type: 'text',
-        name: 'host',
+        name: 'databaseHost',
         value: '',
-        placeholder: 'Host'
+        placeholder: 'Database host'
       },
       {
         styles: 'block border border-grey-light w-full p-3 rounded mb-4 text-black',
         type: 'text',
-        name: 'publicKey',
+        name: 'databasePort',
         value: '',
-        placeholder: 'Public key'
+        placeholder: 'Database port'
+      },
+      {
+        styles: 'block border border-grey-light w-full p-3 rounded mb-4 text-black',
+        type: 'text',
+        name: 'databaseUser',
+        value: '',
+        placeholder: 'Database user'
+      },
+      {
+        styles: 'block border border-grey-light w-full p-3 rounded mb-4 text-black',
+        type: 'text',
+        name: 'databasePassword',
+        value: '',
+        placeholder: 'Database password'
       },
       {
         styles: 'w-full py-3 rounded bg-white text-black hover:bg-green-dark focus:outline-none my-1',
