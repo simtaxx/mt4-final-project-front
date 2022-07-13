@@ -28,8 +28,8 @@ const Signin = () => {
   }
 
   return (
-    <div className="flex flex-col mt-20">
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
+    <div className="flex flex-col mt-12">
+      <div className="container min-w-20 max-w-max mx-auto flex-1 flex flex-col items-center px-2">
         <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full">
           <h1 className="mb-8 text-3xl text-center">Connecte toi avec ton mail HETIC</h1>
           <input 
