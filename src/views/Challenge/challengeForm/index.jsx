@@ -71,6 +71,7 @@ const ChallengeForm = ({ challengeName, challengeId, questions }) => {
     const { token } = JSON.parse(localStorage.getItem('user'))
     const options = { headers: { token: `Bearer ${token}` } }
     const { data }= await checkQuestions(`/challenges/${challengeId}/questions`, options)
+    console.log(data, data[0])
     const failedQuestion = data.find(question => !question.isReponseOk)
     if (failedQuestion) {
       const question = questions.find(question => question.questionId === failedQuestion.questionId)
