@@ -23,7 +23,7 @@ const EmailCheck = () => {
           userContext.setUser(prev => ({ ...prev, token, emailChecked }))
           if (emailChecked === 1) {
             loadingContext.setIsLoading(false)
-            navigate('/')
+            navigate('/challenges')
           }
           loadingContext.setIsLoading(false)
         } else {
@@ -47,7 +47,7 @@ const EmailCheck = () => {
     <div className="flex flex-col mt-12">
     <div className="container min-w-20 max-w-max mx-auto flex-1 flex flex-col items-center px-2">
       <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full">
-        <h1 className="mt-8 mb-8 text-3xl text-center">Un magic link t&apos;as été envoyé !</h1>
+        <h1 className="mt-8 mb-8 text-3xl text-center">Un magic link t&apos;a été envoyé !</h1>
       </div>
     </div>
   </div>
