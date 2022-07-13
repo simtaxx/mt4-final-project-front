@@ -21,7 +21,7 @@ const Profile = () => {
     <main className="flex flex-col mt-20">
       <div className="min-w-20 container max-w-max mx-auto flex-1 flex flex-col items-center px-2">
         <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full h-full">
-          <h1 className="mb-8 text-3xl text-center">Bienvenue sur ton profile !</h1>
+          <h1 className="mb-8 text-3xl text-center">Bienvenue sur ton profil !</h1>
           <p className='mb-8 text-2xl text-center'>{userProfile}</p>
           <button
             onClick={handleClick}
