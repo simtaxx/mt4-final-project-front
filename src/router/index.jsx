@@ -19,7 +19,7 @@ const Router = () => {
       <Route path="/signin" element={<Signin />} />
       <Route path="/challenges" element={<NeedAuth><Challenges /></NeedAuth>} />
       <Route path="/challenges/:id" element={<NeedAuth><Challenge /></NeedAuth>} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/profile" element={<NeedAuth><Profile /></NeedAuth>} />
       <Route path="/stats" element={<NeedAuth><Stats /></NeedAuth>} />
       <Route path="/error" element={<Error />} />
       <Route path="/email-check" element={<EmailCheck />} />
