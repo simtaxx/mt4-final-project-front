@@ -1,7 +1,8 @@
 import axios from 'axios'
+//https://final-project-cloud.herokuapp.com/api
 
 const api = axios.create({
-  baseURL: 'https://final-project-cloud.herokuapp.com/api'
+  baseURL: 'http://localhost:5050/api'
 })
 
 export const signIn = async (url, params) => {
