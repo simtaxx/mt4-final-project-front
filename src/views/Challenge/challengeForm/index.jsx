@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { checkUserConnections, sendUserChallengeInformations, checkQuestions } from '../../../api'
 import UserContext from '../../../contexts/user-context'
-import LoadingContext from '../../contexts/loading-context'
+import LoadingContext from '../../../contexts/loading-context'
 import { forms } from './forms'
 import './styles.scss'
 
