@@ -1,17 +1,32 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { fetchCurrentChallenge } from '../../api'
 import ChallengeForm from './challengeForm'
 import './styles.scss'
 
 const Challenge = () => {
-  const [challenge, setChallenge] = useState({})
+  const { id } = useParams()
+  const [selectedChallenge, setChallenge] = useState({})
 
   useEffect(() => {
-    setChallenge({ id: 1, name: 'SQL CHALLENGE', questions: [{ id: 1, text: 'Met un fichier hello.txt', points: 3 }] })
+    getCurrentChallenge()
   }, [setChallenge])
+
+  const getCurrentChallenge = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'))
+    const options = { headers: { token: `Bearer ${token}` } }
+    const { data } = await fetchCurrentChallenge(`/challenges/${id}`, options)
+    setChallenge(data)
+  }
 
   return (
     <div className='challenge'>
-      <ChallengeForm challengeName={challenge.name} />
+      <ChallengeForm
+        challengeName={selectedChallenge.challengeName}
+        challengeId={selectedChallenge.challengeId}
+        questions={selectedChallenge.questions}
+      />
     </div>
   )
 }
