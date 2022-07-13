@@ -28,7 +28,7 @@ const Signin = () => {
   }
 
   return (
-    <div className="flex flex-col mt-12">
+    <div className="flex flex-col mt-20">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
         <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full">
           <h1 className="mb-8 text-3xl text-center">Connecte toi avec ton mail HETIC</h1>
@@ -42,7 +42,7 @@ const Signin = () => {
           <button
             onClick={handleClick}
             type="submit"
-            className="w-full text-center py-3 rounded bg-white text-black hover:bg-green-dark focus:outline-none my-1"
+            className="w-full text-center py-3 rounded bg-white text-black hover:bg-green-400 focus:outline-none my-1"
           >
             Connecte toi
           </button>

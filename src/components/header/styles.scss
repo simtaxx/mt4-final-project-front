@@ -25,6 +25,10 @@
     align-items: center;
     justify-content: space-between;
     margin-right: 20px;
+
+    .header__challenges {
+      margin-right: 2rem;
+    }
   }
 
   a:not(.header__logo) {

@@ -44,9 +44,13 @@ const EmailCheck = () => {
   }, [])
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold">EmailCheck</h1>
+    <div className="flex flex-col mt-20">
+    <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center px-2">
+      <div className="bg-gray-700 px-6 py-8 rounded shadow-m w-full">
+        <h1 className="mb-8 text-3xl text-center">Un magic link t&apos;as été envoyé !</h1>
+      </div>
     </div>
+  </div>
   );
 }
 

@@ -15,9 +15,12 @@ const Header = () => {
     <header className='header'>
       <div className='header__logo-container'>
         <Link to="/" className='header__logo'><img src={Logo} alt="Logo" /></Link>
-        <Link to="/challenges" className='header__challenges'>Challenges</Link>
+      </div>
+      <div className='header__challenges'>
+        
       </div>
       <div className='header__log-container'>
+        <Link to="/challenges" className='header__challenges'>Challenges</Link>
         {userProfile}
       </div>
     </header>
